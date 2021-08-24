@@ -3,10 +3,10 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://sergiy-bubenko.github.io/goit-js-hw-10-food-service",
+  "homepage": "https://sergiy-bubenko.github.io/goit-js-hw-12-countries",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-10-food-service/",
+    "build": "parcel build src/*.html --public-url /goit-js-hw-12-countries/",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build"
   },
