@@ -1,8 +1,7 @@
 import './sass/main.scss';
 import debounce from 'lodash.debounce'
-import {  error, alert  } from '../node_modules/@pnotify/core/dist/PNotify.js';
+import { error, } from '../node_modules/@pnotify/core/dist/PNotify.js';
 import '@pnotify/core/dist/BrightTheme.css';
-import { array, func } from 'assert-plus';
 import API from './js/fetchCountries';
 import oneCountryInf from './templates/oneCountryInf.hbs'
 
@@ -11,7 +10,6 @@ const refs = {
   input: document.querySelector('#input'),
   box: document.querySelector('#box')
 }
-
 refs.input.addEventListener('input', debounce(getInputText, 500))
 
 function getInputText() {
@@ -20,7 +18,6 @@ function getInputText() {
 
   API.fetchCountries(refs.input.value)
     .then(arr => {
-      console.log('arr', arr);
       if (arr.length > 10) {
         return error({
           text: 'Too many matches found. Please enter a more specific query!'
@@ -35,21 +32,17 @@ function getInputText() {
       return arr
     })
     .then(arr => {
-      console.log('1', arr);
       return createListCountries(arr)
     })
     .catch(err => {
       console.log(err);
-      return alert({
-          text: 'No results were found for the given request, please change the request conditions!'
-        })
     });
-};
+  };
 
 function createListCountries(arr) {
   arr.forEach(obj => {
-      createCountryName(obj)
-    })
+    createCountryName(obj)
+  })
 };
 
 function createCountryName(obj) {
