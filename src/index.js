@@ -1,3 +1,4 @@
+'use strict';
 import './sass/main.scss';
 import debounce from 'lodash.debounce'
 import { error, } from '../node_modules/@pnotify/core/dist/PNotify.js';
@@ -22,34 +23,25 @@ function getInputText() {
         return error({
           text: 'Too many matches found. Please enter a more specific query!'
         })
-      }
-      return arr
-    })
-    .then(arr => {
-      if (arr.length === 1) {
+      } else if (arr.length === 1) {
         return refs.box.innerHTML = oneCountryInf(...arr)
-      }
-      return arr
+      } 
+        return createListCountries(arr)
     })
-    .then(arr => {
-      return createListCountries(arr)
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
   };
 
 function createListCountries(arr) {
-  arr.forEach(obj => {
-    createCountryName(obj)
-  })
+  refs.box.appendChild(createCountryName(arr))
 };
 
-function createCountryName(obj) {
-  const countryNamesContainer = document.createElement('li');
-  countryNamesContainer.textContent = obj.name;
-  countriesList.appendChild(countryNamesContainer);
-  box.appendChild(countriesList);
+function createCountryName(arr) {
+  arr.forEach(el => {
+    const countryNameElem = document.createElement('li');
+    countryNameElem.textContent = el.name;
+    countriesList.appendChild(countryNameElem);
+  })
+  return countriesList
 };
 
 
